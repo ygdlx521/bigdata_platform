@@ -1,5 +1,11 @@
 # -*- coding: UTF-8 -*-
+"""
+Created on Fri Nov 16 13:48:12 2018
 
+@author: ZiFeng
+
+@function: ETLBase
+"""
 import sys
 import re
 import os
@@ -10,7 +16,6 @@ import time
 from ipip.ipip import IP
 reload(sys)
 sys.setdefaultencoding('utf-8')
-
 
 class ETLBase(object):
     

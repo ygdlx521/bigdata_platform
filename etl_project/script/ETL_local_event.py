@@ -1,6 +1,16 @@
 # -*- coding: UTF-8 -*-
+<<<<<<< HEAD
 
 import sys
+=======
+"""
+Created on Fri Nov 16 13:48:12 2018
+
+@author: ZiFeng
+
+@function: ETL_local_event
+"""
+>>>>>>> 301e81a0502bef4d0920ba310970fb1ecfa1dddc
 from itertools import islice
 from ETLEvent import ETLEvent
 
@@ -23,7 +33,10 @@ if __name__ == '__main__':
                 print line
                 result_dict = etl_obj.process_original_log(
                     line, regex_compiled)
+<<<<<<< HEAD
                 #print result_dict
+=======
+>>>>>>> 301e81a0502bef4d0920ba310970fb1ecfa1dddc
                 print "--------------- result_dict ----------------"
                 print result_dict
                 if result_dict is None:
@@ -36,7 +49,10 @@ if __name__ == '__main__':
                     "create_event_table_page_view.sql")
                 output = etl_obj.concatenate_hive_columns(
                     result_dict, hive_table_schemas)
+<<<<<<< HEAD
                 #print output
+=======
+>>>>>>> 301e81a0502bef4d0920ba310970fb1ecfa1dddc
                 output = output.encode('utf8')
                 print "--------------- output ----------------"
                 print output

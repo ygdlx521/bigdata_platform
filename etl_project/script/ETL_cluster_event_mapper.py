@@ -1,5 +1,16 @@
+<<<<<<< HEAD
 # -*- coding: utf-8 -*-
 
+=======
+# -*- coding: UTF-8 -*-
+"""
+Created on Fri Nov 16 13:48:12 2018
+
+@author: ZiFeng
+
+@function: ETL_cluster_event_mapper
+"""
+>>>>>>> 301e81a0502bef4d0920ba310970fb1ecfa1dddc
 from ETLEvent import ETLEvent
 import sys
 import json
