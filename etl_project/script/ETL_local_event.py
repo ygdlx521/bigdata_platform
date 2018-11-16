@@ -1,8 +1,4 @@
 # -*- coding: UTF-8 -*-
-<<<<<<< HEAD
-
-import sys
-=======
 """
 Created on Fri Nov 16 13:48:12 2018
 
@@ -10,12 +6,20 @@ Created on Fri Nov 16 13:48:12 2018
 
 @function: ETL_local_event
 """
->>>>>>> 301e81a0502bef4d0920ba310970fb1ecfa1dddc
+import os
 from itertools import islice
 from ETLEvent import ETLEvent
 
 if __name__ == '__main__':
     prj_path = "/home/atguigu/bigdata_platform/etl_project/"
+    result_path = prj_path + "result"
+    log_path = prj_path + "log"
+    if not os.path.isdir(result_path):
+        print result_path + "not exist and create it"
+        os.mkdir(result_path)
+    if not os.path.isdir(log_path):
+        print log_path + "not exist and create it"
+        os.mkdir(log_path)
     inputfile = prj_path + "../data_project/nginx_log/20181019"
     etl_obj = ETLEvent("local", "user_behaviour_local",prj_path)
     regex = r'(?P<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|-) - - \[(?P<dateandtime>\d{10})\]\s+((\"(GET|POST|HEAD)\s+)(?P<click_url>.+)( (http|HTTP)\/1\.1")) (?P<httpstatus>\d{3}) (?P<bytessent>(\d+|-)) (?P<sign>\S+) (?P<num>\d+) (["](?P<referer>(\-)|(.+))["]) (?P<cookie>.+) (["](?P<useragent>.+)["])'
@@ -33,10 +37,6 @@ if __name__ == '__main__':
                 print line
                 result_dict = etl_obj.process_original_log(
                     line, regex_compiled)
-<<<<<<< HEAD
-                #print result_dict
-=======
->>>>>>> 301e81a0502bef4d0920ba310970fb1ecfa1dddc
                 print "--------------- result_dict ----------------"
                 print result_dict
                 if result_dict is None:
@@ -49,10 +49,6 @@ if __name__ == '__main__':
                     "create_event_table_page_view.sql")
                 output = etl_obj.concatenate_hive_columns(
                     result_dict, hive_table_schemas)
-<<<<<<< HEAD
-                #print output
-=======
->>>>>>> 301e81a0502bef4d0920ba310970fb1ecfa1dddc
                 output = output.encode('utf8')
                 print "--------------- output ----------------"
                 print output

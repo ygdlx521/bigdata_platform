@@ -1,7 +1,4 @@
 # -*- coding: UTF-8 -*-
-<<<<<<< HEAD
-
-=======
 """
 Created on Fri Nov 16 13:48:12 2018
 
@@ -9,7 +6,6 @@ Created on Fri Nov 16 13:48:12 2018
 
 @function: ETLEvent
 """
->>>>>>> 301e81a0502bef4d0920ba310970fb1ecfa1dddc
 from ETLBase import ETLBase
 
 class ETLEvent(ETLBase):
