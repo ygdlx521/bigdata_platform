@@ -129,7 +129,7 @@ def queryMovieInfo(movieUrls,fo):
 if __name__=='__main__':
     print("开始抓取电影数据")
     fo = open("video_info.data",'w')
-    for i in range(2,101): 
+    for i in range(1,101): 
         url = "http://www.dytt8.net/html/gndy/dyzz/list_23_"+str(i)+".html"
         movieUrls = queryMovieList(url)
         print url

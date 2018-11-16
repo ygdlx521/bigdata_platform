@@ -53,12 +53,11 @@ if __name__ == '__main__':
                 print "--------------- output ----------------"
                 print output
                 if table_name == 'dwd_user_view_event_d':
-                    etl_obj.write_hive_table_file(click_fp, table_name, output)
-                elif table_name == 'dwd_user_click_event_d':
                     etl_obj.write_hive_table_file(view_fp, table_name, output)
-                elif table_name == 'dwd_user_other_event_d':
-                    etl_obj.write_hive_table_file(others_fp, table_name,
-                                                  output)
+                elif table_name == 'dwd_user_click_event_d':
+                    etl_obj.write_hive_table_file(click_fp, table_name, output)
+                elif table_name == 'dwd_user_others_event_d':
+                    etl_obj.write_hive_table_file(others_fp, table_name,output)
     view_fp.close()
     click_fp.close()
     others_fp.close()
