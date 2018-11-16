@@ -37,6 +37,8 @@ hadoop jar /opt/module/hadoop-2.7.2/share/hadoop/tools/lib/hadoop-streaming-2.7.
 -cmdenv DAY=${day} \
 -cmdenv HOUR=${hour}
 
+rm script.tar.gz
+rm multiOutput.jar
 #-outputformat "com.custom.CustomMultiOutputFormat" \
 #-D mapreduce.map.output.compress=true \
 #-D mapreduce.map.output.compress.codec=org.apache.hadoop.io.compress.Lz4Codec \

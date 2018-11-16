@@ -5,8 +5,10 @@ then
     echo "Error : Expect 1 parameters: day_time:%Y%m%d%H"
     exit 1
 fi
+cp -r /home/atguigu/anaconda2/envs/python2.7 ../script/
 cd ../ && tar zcvf script.tar.gz script
-cp script.tar.gz ./bin && cd -
+rm -r script/python2.7
+mv script.tar.gz ./bin && cd -
 if [ $? -eq 0 ]
 then
     echo "pack tarball succeed"
