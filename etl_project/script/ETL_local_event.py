@@ -5,14 +5,14 @@ from itertools import islice
 from ETLEvent import ETLEvent
 
 if __name__ == '__main__':
-    prj_path = "/home/atguigu/bigdata_platform/etl_project"
-    inputfile = prj_path + "/log/2018101900"
+    prj_path = "/home/atguigu/bigdata_platform/etl_project/"
+    inputfile = prj_path + "../data_project/nginx_log/20181019"
     etl_obj = ETLEvent("local", "user_behaviour_local",prj_path)
     regex = r'(?P<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|-) - - \[(?P<dateandtime>\d{10})\]\s+((\"(GET|POST|HEAD)\s+)(?P<click_url>.+)( (http|HTTP)\/1\.1")) (?P<httpstatus>\d{3}) (?P<bytessent>(\d+|-)) (?P<sign>\S+) (?P<num>\d+) (["](?P<referer>(\-)|(.+))["]) (?P<cookie>.+) (["](?P<useragent>.+)["])'
     regex_compiled = etl_obj.compile_regex(regex)
-    view_file = prj_path + '/result/user_view'
-    click_file = prj_path + '/result/user_click'
-    others_file = prj_path + '/result/user_others'
+    view_file = prj_path + 'result/user_view'
+    click_file = prj_path + 'result/user_click'
+    others_file = prj_path + 'result/user_others'
     view_fp = open(view_file, 'w')
     click_fp = open(click_file, 'w')
     others_fp = open(others_file, 'w')

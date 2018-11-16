@@ -20,7 +20,6 @@ output="/user/atguigu/bigdata_platform/dwd/dwd_user_all_event_d/year=${year}/mon
 hdfs dfs -test -d ${output}
 if [[ $? == 0 ]];then
     hdfs dfs -rm -r ${output}
-#    hive -e "use player;alter table video_pc_player_total drop if exists partition (event_day='${output_day}',event_hour='${hour}')"
 fi
 
 hadoop jar /opt/module/hadoop-2.7.2/share/hadoop/tools/lib/hadoop-streaming-2.7.2.jar \
