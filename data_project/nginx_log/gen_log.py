@@ -24,7 +24,7 @@ if __name__ == "__main__":
         return pages[random.randint(0,len(pages)-1)]
     
     def gen_userid():
-        return str(random.randint(0,999999))
+        return str(random.randint(0,9999))
     
     def gen_vid():
         return str(random.randint(0,628))
@@ -33,6 +33,16 @@ if __name__ == "__main__":
         pages = ['baidu','iqiyi','wasu','mgtv','cctv','ifeng','pptv','1905',
                  'youku','qq','sohu']
         return "www."+pages[random.randint(0,len(pages)-1)]+".com"
+    
+    def gen_frm():
+        pages = ['baidu','iqiyi','wasu','mgtv','cctv','ifeng','pptv','1905',
+                 'youku','qq','sohu']
+        return quote("www."+pages[random.randint(0,len(pages)-1)]+".com") 
+    
+    def gen_url():
+        pages = ['baidu','iqiyi','wasu','mgtv','cctv','ifeng','pptv','1905',
+                 'youku','qq','sohu']
+        return quote("www."+pages[random.randint(0,len(pages)-1)]+".com") 
     
     def gen_ip():
         return ipaddress.IPv4Address(random.randint(0, 2**32-1)).exploded
@@ -47,8 +57,8 @@ if __name__ == "__main__":
         title_list.append(title)
     fi.close()
 
-    for _ in range(0,10): 
-        base_log = "{ip} - - [{time}] \"GET /click.gif?page={page}&block={block}&vid={vid} HTTP/1.1\" 200 0 + 0 \"http://{refer_host}\" userid={userid} \"{ua}\"".format(
+    for _ in range(0,10000): 
+        base_log = "{ip} - - [{time}] \"GET /view.gif?page={page}&block={block}&vid={vid}&frm={frm} HTTP/1.1\" 200 0 + 0 \"http://{refer_host}\" userid={userid} \"{ua}\"".format(
         time = gen_time(),
         ip = gen_ip(),
         page = gen_page(),
@@ -56,10 +66,11 @@ if __name__ == "__main__":
         vid = gen_vid(),
         refer_host = gen_referer_host(),
         userid = gen_userid(),
-        ua = ua.random
+        ua = ua.random,
+        frm = gen_frm()
         )
         fo.write(base_log+"\n")
-        base_log = "{ip} - - [{time}] \"GET /view.gif?page={page}&block={block}&vid={vid} HTTP/1.1\" 200 0 + 0 \"http://{refer_host}\" userid={userid} \"{ua}\"".format(
+        base_log = "{ip} - - [{time}] \"GET /click.gif?page={page}&block={block}&vid={vid}&url={url} HTTP/1.1\" 200 0 + 0 \"http://{refer_host}\" userid={userid} \"{ua}\"".format(
         time = gen_time(),
         ip = gen_ip(),
         page = gen_page(),
@@ -67,7 +78,8 @@ if __name__ == "__main__":
         vid = gen_vid(),
         refer_host = gen_referer_host(),
         userid = gen_userid(),
-        ua = ua.random
+        ua = ua.random,
+        url = gen_url()
         )
         fo.write(base_log+"\n")
         base_log = "{ip} - - [{time}] \"GET /search.gif?page={page}&block=search_bar&wd={wd} HTTP/1.1\" 200 0 + 0 \"http://{refer_host}\" userid={userid} \"{ua}\"".format(
