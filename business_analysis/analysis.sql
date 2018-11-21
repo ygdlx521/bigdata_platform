@@ -82,6 +82,7 @@ group by url_params['page'],url_params['url']
 --8.网站总日活 app
 select
 count(distinct tb1.userid) as uv
+from
 (
 	select 
 	userid
