@@ -1,5 +1,5 @@
 --################### 网站自身数据 ###################
---1.各页面展现 dwm
+各页面展现 dwm
 select 
 url_params['page'] as page,
 count(*) as pv,
@@ -10,7 +10,7 @@ where concat(year,month,day) = '20181019'
 group by url_params['page']
 ;
 
---2.各页面点击 dwm
+各页面点击 dwm
 select 
 url_params['page'] as page,
 count(*) as pv,
@@ -21,7 +21,7 @@ where concat(year,month,day) = '20181019'
 group by url_params['page']
 ;
 
---3.各页面各区块点击 dwm
+各页面各区块点击 dwm
 select 
 url_params['page'] as page,
 url_params['block'] as block,
@@ -62,7 +62,7 @@ url_params['url']
 count(*) as pv,
 count(distinct userid) as uv
 from 
-dwd_user_view_event_d
+dwd_user_click_event_d
 where concat(year,month,day) = '20181019'
 group by url_params['url']
 ;
@@ -70,11 +70,11 @@ group by url_params['url']
 --7.各页面点击跳出链接 dwm
 select 
 url_params['page'],
-url_params['url']
+url_params['url'],
 count(*) as pv,
 count(distinct userid) as uv
 from 
-dwd_user_view_event_d
+dwd_user_click_event_d
 where concat(year,month,day) = '20181019'
 group by url_params['page'],url_params['url']
 ;
@@ -99,17 +99,17 @@ union all
 	select 
 	userid
 	from 
-	dwd_user_search_event_d
+	dwd_user_others_event_d
 	where concat(year,month,day) = '20181019'
 )tb1
 ;
 
 --9.检索词频 dwm
 select 
-url_params['wd']
+url_params['wd'],
 count(*) as pv
 from 
-dwd_user_search_event_d
+dwd_user_others_event_d
 where concat(year,month,day) = '20181019'
 group by url_params['wd']
 order by pv desc
@@ -121,7 +121,7 @@ url_params['vid'],
 count(*) as pv,
 count(distinct userid) as uv
 from 
-dwd_user_click_event_d
+dwd_user_view_event_d
 where concat(year,month,day) = '20181019'
 group by url_params['vid']
 order by pv desc
@@ -202,7 +202,8 @@ full outer join
 	where concat(year,month,day) = '20181019'
 	group by browser
 )tb2 
-on tb1.userid = tb2.userid
+on tb1.browser = tb2.browser
+;
 
 --13.流量来源主题用户访问页面数、点击次数、检索次数、视频观看数 dwm
 select
@@ -275,7 +276,7 @@ union all
 	select 
 	userid
 	from 
-	dwd_user_search_event_d
+	dwd_user_others_event_d
 	where concat(year,month,day) = '20181019'
 )tb1
 group by country,province,city
@@ -504,6 +505,33 @@ left outer join
 on tb1.vid = tb2.vid
 group by tb2.actor
 ;
+
+--25.哪个主演的视频人们最爱看
+select
+tb2.actor,
+count(*) as uv
+from
+(
+	select 
+	url_params['vid'] as vid
+	from 
+	event.dwd_user_view_event_d
+	where concat(year,month,day) = '20181019'
+)tb1
+left outer join
+(
+	select 
+	vid,
+	actor
+	from 
+	dimension.dim_video_info
+	where concat(year,month,day) = '20181019'
+)tb2
+on tb1.vid = tb2.vid
+group by tb2.actor
+;
+
+
 
 --################### 行为、视频、用户信息关联分析 ###################
 
